@@ -1,0 +1,54 @@
+# Xcode
+build/
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods (not used, but just in case)
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# macOS
+.DS_Store
+
+# Signing material — NEVER commit
+*.key
+*.p12
+*.cer
+*.pem
+*.csr
+*.mobileprovision
+*.b64.txt
+openssl-mini.cnf
+GoogleService-Info.plist
+p12.b64.txt
+profile.b64.txt
+lexykon-97268-firebase-adminsdk-fbsvc-efe8ca12ba.json
+Lexykon_AdHoc.mobileprovision
+
+# Firebase service account — NEVER commit
+lexykon-*-firebase-adminsdk-*.json
+GoogleService-Info.plist
+
+# Editor
+.vscode/
+.idea/

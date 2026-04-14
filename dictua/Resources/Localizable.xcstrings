@@ -1,0 +1,75 @@
+{
+  "sourceLanguage" : "uk",
+  "strings" : {
+    "Lookup" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nachschlagen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lookup" } },
+        "pl" : { "stringUnit" : { "state" : "translated", "value" : "Wyszukaj" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Поиск" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Пошук" } }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einstellungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "pl" : { "stringUnit" : { "state" : "translated", "value" : "Ustawienia" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Настройки" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Налаштування" } }
+      }
+    },
+    "Saved" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Gespeichert" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Saved" } },
+        "pl" : { "stringUnit" : { "state" : "translated", "value" : "Zapisane" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сохранённые" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Збережене" } }
+      }
+    },
+    "Tools" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tools" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Інструменти" } }
+      }
+    },
+    "Tutor" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tutor" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Репетитор" } }
+      }
+    },
+    "Translate" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Translate" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Переклад" } }
+      }
+    },
+    "Session expired" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Session expired" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Сесію завершено" } }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }
+      }
+    },
+    "Offline — showing cached content where available" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Offline — showing cached content where available" } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Офлайн — показуємо кешований вміст, де можливо" } }
+      }
+    },
+    "Offline. Cached content may be shown." : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Offline. Cached content may be shown." } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Офлайн. Може відображатися кешований вміст." } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

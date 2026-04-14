@@ -1,4 +1,5 @@
 import SwiftUI
+import DictCore
 
 /// Renders grammar features from lemmas.grammar JSONB as styled badges.
 ///

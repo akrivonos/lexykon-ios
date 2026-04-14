@@ -1,7 +1,6 @@
 import Foundation
 import DictCore
 
-@MainActor
 final class CollectionsViewModel: ObservableObject {
     @Published var collections: [CollectionSummary] = []
     @Published var selectedCollection: CollectionDetail?

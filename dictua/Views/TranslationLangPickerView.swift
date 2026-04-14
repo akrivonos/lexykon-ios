@@ -1,4 +1,5 @@
 import SwiftUI
+import DictCore
 
 /// Toggle buttons for selecting preferred translation languages (max 5).
 struct TranslationLangPickerView: View {

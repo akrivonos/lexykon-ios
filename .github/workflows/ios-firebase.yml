@@ -54,6 +54,33 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/
 
+      - name: Generate placeholder app icon
+        run: |
+          python3 - <<'PY'
+          import struct, zlib, os
+          # Generate a 1024x1024 solid color PNG (no external libs)
+          def make_png(path, w, h, rgb):
+              def chunk(tag, data):
+                  crc = zlib.crc32(tag + data) & 0xffffffff
+                  return struct.pack("!I", len(data)) + tag + data + struct.pack("!I", crc)
+              sig = b"\x89PNG\r\n\x1a\n"
+              ihdr = struct.pack("!IIBBBBB", w, h, 8, 2, 0, 0, 0)
+              raw = b""
+              row = bytes(rgb) * w
+              for _ in range(h):
+                  raw += b"\x00" + row
+              idat = zlib.compress(raw, 9)
+              with open(path, "wb") as f:
+                  f.write(sig)
+                  f.write(chunk(b"IHDR", ihdr))
+                  f.write(chunk(b"IDAT", idat))
+                  f.write(chunk(b"IEND", b""))
+          os.makedirs("dictua/Assets.xcassets/AppIcon.appiconset", exist_ok=True)
+          make_png("dictua/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png", 1024, 1024, (0x1E, 0x90, 0xFF))
+          print("Generated AppIcon-1024.png")
+          PY
+          ls -la dictua/Assets.xcassets/AppIcon.appiconset/
+
       - name: Resolve Swift packages
         run: xcodebuild -resolvePackageDependencies -project "$PROJECT" -scheme "$SCHEME"
 

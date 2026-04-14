@@ -50,6 +50,7 @@
 		B10000000000000000000005 = {isa = PBXBuildFile; fileRef = B20000000000000000000005; };
 		B10000000000000000000006 = {isa = PBXBuildFile; fileRef = B20000000000000000000006; };
 		B10000000000000000000007 = {isa = PBXBuildFile; fileRef = B20000000000000000000007; };
+		B10000000000000000000008 = {isa = PBXBuildFile; fileRef = B20000000000000000000008; };
 		/* File refs */
 		A20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dictuaApp.swift; sourceTree = "<group>"; };
 		A20000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		B20000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCollectionSheet.swift; sourceTree = "<group>"; };
 		B20000000000000000000006 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarBadgesView.swift; sourceTree = "<group>"; };
 		B20000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLangPickerView.swift; sourceTree = "<group>"; };
+		B20000000000000000000008 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictUITests.swift; sourceTree = "<group>"; };
 		E20000000000000000000002 = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DictUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 
@@ -121,6 +123,7 @@
 				A30000000000000000000007,
 				A30000000000000000000009,
 				A3000000000000000000000C,
+				B20000000000000000000008,
 			);
 			path = dictua;
 			sourceTree = "<group>";
@@ -278,7 +281,7 @@
 		A40000000000000000000001 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 
 		/* Resources */
-		A50000000000000000000001 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = ( A10000000000000000000017, A10000000000000000000028 ); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000001 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = ( A10000000000000000000017, A10000000000000000000028, B10000000000000000000008 ); runOnlyForDeploymentPostprocessing = 0; };
 
 		/* Sources - dictua target */
 		A60000000000000000000001 = {

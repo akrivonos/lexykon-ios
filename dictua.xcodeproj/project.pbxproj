@@ -65,8 +65,8 @@
 		A20000000000000000000016 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dictua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20000000000000000000017 = {isa = PBXFileReference; lastKnownFileType = text.json; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A2000000000000000000001A = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsHubView.swift; sourceTree = "<group>"; };
-		A2000000000000000000001E = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGridView.swift; sourceTree = "<group>"; };
-		A2000000000000000000001F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicBrowseView.swift; sourceTree = "<group>"; };
+		A2000000000000000000001E = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dictua/Views/Topics/TopicGridView.swift; sourceTree = SOURCE_ROOT; };
+		A2000000000000000000001F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dictua/Views/Topics/TopicBrowseView.swift; sourceTree = SOURCE_ROOT; };
 		A20000000000000000000026 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		A20000000000000000000028 = {isa = PBXFileReference; lastKnownFileType = file; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F20000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentedEntrySpecifier.swift; sourceTree = "<group>"; };

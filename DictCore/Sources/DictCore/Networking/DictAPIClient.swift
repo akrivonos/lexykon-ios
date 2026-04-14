@@ -156,11 +156,8 @@ public actor DictAPIClient {
     }
 
     private func decodeSuccess<T: Decodable>(data: Data, as type: T.Type) throws -> T {
-        struct DataWrapper: Decodable {
-            let data: T
-        }
         do {
-            let wrapper = try decoder.decode(DataWrapper.self, from: data)
+            let wrapper = try decoder.decode(DataWrapper<T>.self, from: data)
             return wrapper.data
         } catch {
             // Some endpoints return { "data": ... } or bare array
@@ -170,6 +167,10 @@ public actor DictAPIClient {
             throw error
         }
     }
+}
+
+private struct DataWrapper<T: Decodable>: Decodable {
+    let data: T
 }
 
 private enum HTTPDateFormatter {

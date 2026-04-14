@@ -11,13 +11,14 @@ public final class AppEnvironment: ObservableObject {
     public let tokenRefreshActor: TokenRefreshActor
     public let entryRepository: EntryRepository
     public let offlineDictionary: OfflineDictionaryService
+    public let authService: AuthService
     public let authViewModel: AuthViewModel
     public let settingsViewModel: AppSettingsViewModel
-    public let collectionsViewModel: CollectionsViewModel
+    let collectionsViewModel: CollectionsViewModel
 
     /// Entry opened via Handoff, deep link, or full-screen cover.
     @Published public var presentedEntry: PresentedEntrySpecifier?
-    @Published public var selectedMainTab: MainTab = .lookup
+    @Published var selectedMainTab: MainTab = .lookup
     @Published public var pendingLookupQuery: String?
     @Published public var pendingResetPasswordToken: String?
     @Published public var pendingVerifyEmailToken: String?
@@ -46,13 +47,15 @@ public final class AppEnvironment: ObservableObject {
         let supportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
             .appendingPathComponent("morphology.sqlite")
         offlineDictionary = OfflineDictionaryService(fileURL: supportURL)
+        authService = AuthService(apiClient: apiClient, tokenStorage: tokenStorage)
         authViewModel = AuthViewModel(apiClient: apiClient, tokenStorage: tokenStorage)
         settingsViewModel = AppSettingsViewModel()
         collectionsViewModel = CollectionsViewModel(apiClient: apiClient, tokenStorage: tokenStorage)
 
         pathMonitor.pathUpdateHandler = { [weak self] path in
-            Task { @MainActor in
-                self?.isNetworkReachable = path.status == .satisfied
+            let reachable = path.status == .satisfied
+            Task { @MainActor [weak self] in
+                self?.isNetworkReachable = reachable
             }
         }
         pathMonitor.start(queue: pathQueue)

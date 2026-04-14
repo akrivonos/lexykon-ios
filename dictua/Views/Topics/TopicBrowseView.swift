@@ -51,7 +51,7 @@ struct TopicEntrySummary: Codable {
 }
 
 public final class TopicBrowseViewModel: ObservableObject {
-    @Published public var entries: [TopicEntrySummary] = []
+    @Published var entries: [TopicEntrySummary] = []
     @Published public var isLoading = false
 
     private let apiClient: DictAPIClient

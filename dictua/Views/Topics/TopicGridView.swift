@@ -52,8 +52,14 @@ struct TopicGridView: View {
     }
 }
 
+struct TopicItem: Codable {
+    let topic: String?
+    let labelUk: String?
+    let entryCount: Int?
+}
+
 public final class TopicGridViewModel: ObservableObject {
-    @Published public var state: LoadingState<[TopicItem]> = .idle
+    @Published var state: LoadingState<[TopicItem]> = .idle
 
     private let apiClient: DictAPIClient
 

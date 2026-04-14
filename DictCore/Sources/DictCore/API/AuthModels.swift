@@ -55,6 +55,11 @@ public struct UserProfile: Codable {
 public struct LoginRequest: Encodable {
     public let email: String
     public let password: String
+
+    public init(email: String, password: String) {
+        self.email = email
+        self.password = password
+    }
 }
 
 public struct RegisterRequest: Encodable {
@@ -62,6 +67,13 @@ public struct RegisterRequest: Encodable {
     public let password: String
     public let displayName: String?
     public let sourceLang: String?
+
+    public init(email: String, password: String, displayName: String?, sourceLang: String?) {
+        self.email = email
+        self.password = password
+        self.displayName = displayName
+        self.sourceLang = sourceLang
+    }
 
     enum CodingKeys: String, CodingKey {
         case email, password

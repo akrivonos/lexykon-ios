@@ -43,6 +43,13 @@
 		F10000000000000000000007 = {isa = PBXBuildFile; fileRef = F20000000000000000000007; };
 		F10000000000000000000009 = {isa = PBXBuildFile; fileRef = F20000000000000000000009; };
 		F1000000000000000000000A = {isa = PBXBuildFile; fileRef = F2000000000000000000000A; };
+		B10000000000000000000001 = {isa = PBXBuildFile; fileRef = B20000000000000000000001; };
+		B10000000000000000000002 = {isa = PBXBuildFile; fileRef = B20000000000000000000002; };
+		B10000000000000000000003 = {isa = PBXBuildFile; fileRef = B20000000000000000000003; };
+		B10000000000000000000004 = {isa = PBXBuildFile; fileRef = B20000000000000000000004; };
+		B10000000000000000000005 = {isa = PBXBuildFile; fileRef = B20000000000000000000005; };
+		B10000000000000000000006 = {isa = PBXBuildFile; fileRef = B20000000000000000000006; };
+		B10000000000000000000007 = {isa = PBXBuildFile; fileRef = B20000000000000000000007; };
 		/* File refs */
 		A20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dictuaApp.swift; sourceTree = "<group>"; };
 		A20000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -77,6 +84,13 @@
 		F20000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewModel.swift; sourceTree = "<group>"; };
 		F20000000000000000000009 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsService.swift; sourceTree = "<group>"; };
 		F2000000000000000000000A = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		B20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		B20000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
+		B20000000000000000000003 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
+		B20000000000000000000004 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailView.swift; sourceTree = "<group>"; };
+		B20000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCollectionSheet.swift; sourceTree = "<group>"; };
+		B20000000000000000000006 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarBadgesView.swift; sourceTree = "<group>"; };
+		B20000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLangPickerView.swift; sourceTree = "<group>"; };
 		E20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictUITests.swift; sourceTree = "<group>"; };
 		E20000000000000000000002 = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DictUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 
@@ -165,6 +179,7 @@
 				A20000000000000000000007,
 				A20000000000000000000008,
 				F20000000000000000000007,
+				B20000000000000000000002,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -178,11 +193,16 @@
 				A2000000000000000000000F,
 				A20000000000000000000010,
 				F20000000000000000000006,
+				B20000000000000000000003,
+				B20000000000000000000004,
+				B20000000000000000000005,
+				B20000000000000000000006,
+				B20000000000000000000007,
 				A3000000000000000000000A,
 				A3000000000000000000000D,
 				A3000000000000000000000E,
 				A3000000000000000000000F,
-				A300000000000000000010,
+				A30000000000000000000010,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +255,7 @@
 				A20000000000000000000014,
 				A20000000000000000000015,
 				F20000000000000000000002,
+				B20000000000000000000001,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -294,6 +315,13 @@
 				F10000000000000000000007,
 				F10000000000000000000009,
 				F1000000000000000000000A,
+				B10000000000000000000001,
+				B10000000000000000000002,
+				B10000000000000000000003,
+				B10000000000000000000004,
+				B10000000000000000000005,
+				B10000000000000000000006,
+				B10000000000000000000007,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

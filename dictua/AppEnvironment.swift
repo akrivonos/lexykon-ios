@@ -41,7 +41,7 @@ public final class AppEnvironment: ObservableObject {
             acceptLanguage: { UserDefaults.standard.string(forKey: "interface_lang") ?? "uk" },
             sourceLang: { UserDefaults.standard.string(forKey: "source_lang") ?? "ru" }
         )
-        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ua.dict.shared")?
+        let storeURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?
             .appendingPathComponent("CachedEntry.sqlite")
         entryRepository = CoreDataEntryRepository(storeURL: storeURL)
         let supportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!

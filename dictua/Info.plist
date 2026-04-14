@@ -37,10 +37,6 @@
 	</array>
 	<key>API_BASE_URL</key>
 	<string>https://lexykon.org/api/v1</string>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.ua.dict.shared</string>
-	</array>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.dictua.viewEntry</string>

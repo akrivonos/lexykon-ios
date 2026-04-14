@@ -1,6 +1,6 @@
 import Foundation
 
-/// Storage for JWT tokens; shared via App Group for extensions.
+/// Storage for JWT tokens in the Keychain.
 public protocol TokenStorage: Sendable {
     func getAccessToken() -> String?
     func getRefreshToken() -> String?
@@ -8,14 +8,13 @@ public protocol TokenStorage: Sendable {
     func clearTokens() throws
 }
 
-/// Keychain-backed token storage with App Group support.
 public final class KeychainTokenStorage: TokenStorage, @unchecked Sendable {
     private let serviceName: String
     private let accessGroup: String?
     private let accessTokenKey = "access_token"
     private let refreshTokenKey = "refresh_token"
 
-    public init(serviceName: String = "ua.dict.auth", accessGroup: String? = "group.ua.dict.shared") {
+    public init(serviceName: String = "ua.dict.auth", accessGroup: String? = nil) {
         self.serviceName = serviceName
         self.accessGroup = accessGroup
     }

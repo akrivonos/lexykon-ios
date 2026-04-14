@@ -37,13 +37,6 @@ jobs:
           echo -n "$P12_BASE64" | base64 --decode -o $CERT_PATH
           echo -n "$PROVISIONING_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
-          # Diagnostics (no secrets leaked — only lengths/hashes)
-          echo "P12_PASSWORD length: ${#P12_PASSWORD}"
-          echo "cert.p12 size: $(wc -c < $CERT_PATH)"
-          echo "cert.p12 sha256: $(shasum -a 256 $CERT_PATH | cut -d' ' -f1)"
-          echo "--- Test password with openssl:"
-          openssl pkcs12 -in $CERT_PATH -noout -passin env:P12_PASSWORD && echo "OPENSSL: password OK" || echo "OPENSSL: password FAILED"
-
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -107,7 +100,7 @@ jobs:
           <plist version="1.0">
           <dict>
             <key>method</key>
-            <string>ad-hoc</string>
+            <string>release-testing</string>
             <key>teamID</key>
             <string>${{ secrets.APPLE_TEAM_ID }}</string>
             <key>signingStyle</key>
@@ -125,32 +118,6 @@ jobs:
             -exportOptionsPlist $RUNNER_TEMP/ExportOptions.plist \
             -exportPath $RUNNER_TEMP/export
 
-      - name: Inspect IPA
-        run: |
-          IPA="$RUNNER_TEMP/export/dictua.ipa"
-          echo "--- IPA file info:"
-          ls -la "$IPA"
-          file "$IPA"
-          echo "--- IPA size (bytes):"
-          stat -f%z "$IPA"
-          echo "--- IPA contents (top-level):"
-          unzip -l "$IPA" | head -30
-          echo "--- Extract Info.plist:"
-          mkdir -p $RUNNER_TEMP/ipa-inspect
-          cd $RUNNER_TEMP/ipa-inspect
-          unzip -q "$IPA"
-          APP_DIR=$(find Payload -maxdepth 1 -name "*.app" | head -1)
-          echo "App bundle: $APP_DIR"
-          if [ -n "$APP_DIR" ]; then
-            plutil -p "$APP_DIR/Info.plist" | head -40
-            echo "--- Embedded provisioning profile:"
-            if [ -f "$APP_DIR/embedded.mobileprovision" ]; then
-              security cms -D -i "$APP_DIR/embedded.mobileprovision" | head -50
-            else
-              echo "(no embedded.mobileprovision)"
-            fi
-          fi
-
       - name: Upload to Firebase App Distribution
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
@@ -165,12 +132,10 @@ jobs:
           # Install Firebase CLI
           npm install -g firebase-tools
 
-          # Upload (with debug output)
           firebase appdistribution:distribute "$RUNNER_TEMP/export/dictua.ipa" \
             --app "$FIREBASE_APP_ID" \
             --groups "testers" \
-            --release-notes "$RELEASE_NOTES" \
-            --debug
+            --release-notes "$RELEASE_NOTES"
 
       - name: Clean up keychain
         if: always()

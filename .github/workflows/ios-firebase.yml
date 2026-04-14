@@ -99,13 +99,24 @@ jobs:
             -exportPath $RUNNER_TEMP/export
 
       - name: Upload to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          groups: testers
-          file: ${{ runner.temp }}/export/dictua.ipa
-          releaseNotes: ${{ github.event.inputs.notes || 'Automated build' }}
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          RELEASE_NOTES: ${{ github.event.inputs.notes || 'Automated build' }}
+        run: |
+          # Write service account JSON to a temp file
+          SA_PATH=$RUNNER_TEMP/firebase-sa.json
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > $SA_PATH
+          export GOOGLE_APPLICATION_CREDENTIALS=$SA_PATH
+
+          # Install Firebase CLI
+          npm install -g firebase-tools
+
+          # Upload
+          firebase appdistribution:distribute "$RUNNER_TEMP/export/dictua.ipa" \
+            --app "$FIREBASE_APP_ID" \
+            --groups "testers" \
+            --release-notes "$RELEASE_NOTES"
 
       - name: Clean up keychain
         if: always()

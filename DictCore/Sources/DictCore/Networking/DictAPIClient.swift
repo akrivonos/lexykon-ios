@@ -131,7 +131,7 @@ public actor DictAPIClient {
         req.httpMethod = method.rawValue
         if let b = body {
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            req.httpBody = try encoder.encode(AnyEncodable(b))
+            req.httpBody = try encoder.encode(AnyEncodable(value: b))
         }
         if requiresAuth, let token = tokenStorage.getAccessToken() {
             req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -156,11 +156,11 @@ public actor DictAPIClient {
     }
 
     private func decodeSuccess<T: Decodable>(data: Data, as type: T.Type) throws -> T {
-        struct DataWrapper<T: Decodable>: Decodable {
+        struct DataWrapper: Decodable {
             let data: T
         }
         do {
-            let wrapper = try decoder.decode(DataWrapper<T>.self, from: data)
+            let wrapper = try decoder.decode(DataWrapper.self, from: data)
             return wrapper.data
         } catch {
             // Some endpoints return { "data": ... } or bare array

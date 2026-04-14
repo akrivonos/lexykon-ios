@@ -28,18 +28,34 @@ public final class CoreDataEntryRepository: EntryRepository, @unchecked Sendable
         self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
+    private static func makeAttribute(
+        name: String,
+        type: NSAttributeType,
+        optional: Bool,
+        defaultValue: Any? = nil
+    ) -> NSAttributeDescription {
+        let attr = NSAttributeDescription()
+        attr.name = name
+        attr.attributeType = type
+        attr.isOptional = optional
+        if let defaultValue = defaultValue {
+            attr.defaultValue = defaultValue
+        }
+        return attr
+    }
+
     private static func createModel() -> NSManagedObjectModel {
         let model = NSManagedObjectModel()
         let entity = NSEntityDescription()
         entity.name = "CachedEntry"
         entity.properties = [
-            NSAttributeDescription(name: "entryId", attributeType: .stringAttributeType).then { $0.isOptional = false },
-            NSAttributeDescription(name: "lemma", attributeType: .stringAttributeType).then { $0.isOptional = true },
-            NSAttributeDescription(name: "pos", attributeType: .stringAttributeType).then { $0.isOptional = true },
-            NSAttributeDescription(name: "tier", attributeType: .stringAttributeType).then { $0.isOptional = true },
-            NSAttributeDescription(name: "cachedJSON", attributeType: .binaryDataAttributeType).then { $0.isOptional = false },
-            NSAttributeDescription(name: "lastAccessedAt", attributeType: .dateAttributeType).then { $0.isOptional = false },
-            NSAttributeDescription(name: "isFavorited", attributeType: .booleanAttributeType).then { $0.isOptional = true; $0.defaultValue = false },
+            makeAttribute(name: "entryId", type: .stringAttributeType, optional: false),
+            makeAttribute(name: "lemma", type: .stringAttributeType, optional: true),
+            makeAttribute(name: "pos", type: .stringAttributeType, optional: true),
+            makeAttribute(name: "tier", type: .stringAttributeType, optional: true),
+            makeAttribute(name: "cachedJSON", type: .binaryDataAttributeType, optional: false),
+            makeAttribute(name: "lastAccessedAt", type: .dateAttributeType, optional: false),
+            makeAttribute(name: "isFavorited", type: .booleanAttributeType, optional: true, defaultValue: false),
         ]
         model.entities = [entity]
         return model

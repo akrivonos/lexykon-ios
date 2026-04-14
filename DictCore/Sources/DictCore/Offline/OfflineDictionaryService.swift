@@ -46,7 +46,7 @@ public final class OfflineDictionaryService: @unchecked Sendable {
     public func lookupLemma(form: String) -> [OfflineLemma] {
         guard isDownloaded else { return [] }
         return queue.sync {
-            guard let conn = connection ?? try? Connection(fileURL.path, readonly: true) else { return [] }
+            guard let conn = connection ?? (try? Connection(fileURL.path, readonly: true)) else { return [] }
             if connection == nil { connection = conn }
             return Self.query(conn: conn, form: form.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
         }

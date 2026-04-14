@@ -7,29 +7,41 @@ struct dictuaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(appEnv)
-                .environmentObject(appEnv.authViewModel)
-                .environmentObject(appEnv.settingsViewModel)
-                .environment(\.appEnvironment, appEnv)
-        }
-        .onOpenURL { url in
-            Task { @MainActor in
-                appEnv.handleDeepLink(url)
-            }
+            rootView
         }
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active {
-                Task { await appEnv.onForeground() }
-                NotificationScheduler.shared.clearBadge()
-            }
+            handleScenePhase(newPhase)
         }
-        .onContinueUserActivity("com.dictua.viewEntry") { activity in
-            if let slug = activity.userInfo?["entry_slug"] as? String, !slug.isEmpty {
-                appEnv.presentedEntry = .slug(slug)
-            } else if let entryId = activity.userInfo?["entry_id"] as? String, !entryId.isEmpty {
-                appEnv.presentedEntry = .id(entryId)
-            }
+    }
+
+    @ViewBuilder
+    private var rootView: some View {
+        ContentView()
+            .environmentObject(appEnv)
+            .environmentObject(appEnv.authViewModel)
+            .environmentObject(appEnv.settingsViewModel)
+            .onOpenURL(perform: handleURL)
+            .onContinueUserActivity("com.dictua.viewEntry", perform: handleUserActivity)
+    }
+
+    private func handleScenePhase(_ newPhase: ScenePhase) {
+        if newPhase == .active {
+            Task { await appEnv.onForeground() }
+            NotificationScheduler.shared.clearBadge()
+        }
+    }
+
+    private func handleURL(_ url: URL) {
+        Task { @MainActor in
+            appEnv.handleDeepLink(url)
+        }
+    }
+
+    private func handleUserActivity(_ activity: NSUserActivity) {
+        if let slug = activity.userInfo?["entry_slug"] as? String, !slug.isEmpty {
+            appEnv.presentedEntry = .slug(slug)
+        } else if let entryId = activity.userInfo?["entry_id"] as? String, !entryId.isEmpty {
+            appEnv.presentedEntry = .id(entryId)
         }
     }
 }

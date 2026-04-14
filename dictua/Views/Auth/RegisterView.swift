@@ -18,7 +18,7 @@ struct RegisterView: View {
                     .textContentType(.newPassword)
                 TextField("Display name (optional)", text: $displayName)
                 if let msg = auth.errorMessage {
-                    Text(msg).foregroundStyle(.red).font(.caption)
+                    Text(msg).foregroundStyle(Color.red).font(.caption)
                 }
                 Button("Register") {
                     Task {

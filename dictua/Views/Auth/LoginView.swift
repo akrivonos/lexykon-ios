@@ -15,7 +15,7 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                     .textContentType(.password)
                 if let msg = auth.errorMessage {
-                    Text(msg).foregroundStyle(.red).font(.caption)
+                    Text(msg).foregroundStyle(Color.red).font(.caption)
                 }
                 Button("Log in") {
                     Task {

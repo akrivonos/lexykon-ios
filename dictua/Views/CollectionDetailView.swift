@@ -42,7 +42,7 @@ struct CollectionDetailView: View {
             } else if let error = viewModel.error {
                 VStack(spacing: 12) {
                     Text(error)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(Color.red)
                     Button(String(localized: "Retry")) {
                         Task { await viewModel.loadDetail(id: collectionId) }
                     }

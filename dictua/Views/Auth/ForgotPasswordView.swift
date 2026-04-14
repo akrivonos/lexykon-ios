@@ -15,10 +15,10 @@ struct ForgotPasswordView: View {
                 .textContentType(.emailAddress)
                 .autocapitalization(.none)
             if let localError {
-                Text(localError).foregroundStyle(.red).font(.caption)
+                Text(localError).foregroundStyle(Color.red).font(.caption)
             }
             if let infoMessage {
-                Text(infoMessage).foregroundStyle(.green).font(.caption)
+                Text(infoMessage).foregroundStyle(Color.green).font(.caption)
             }
             Button(String(localized: "Send reset link")) {
                 Task {

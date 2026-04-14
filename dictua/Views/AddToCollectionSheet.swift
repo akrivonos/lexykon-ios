@@ -47,7 +47,7 @@ struct AddToCollectionSheet: View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 48))
-                .foregroundStyle(.green)
+                .foregroundStyle(Color.green)
             Text("Saved to \(saved)")
                 .font(.headline)
         }
@@ -90,7 +90,7 @@ struct AddToCollectionSheet: View {
                 }
                 Spacer()
                 Image(systemName: "plus.circle")
-                    .foregroundStyle(.accentColor)
+                    .foregroundStyle(Color.accentColor)
             }
         }
     }

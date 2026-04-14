@@ -111,12 +111,12 @@ struct EntryDetailView: View {
                     }
                     if let flagMessage {
                         Section {
-                            Text(flagMessage).foregroundStyle(.green)
+                            Text(flagMessage).foregroundStyle(Color.green)
                         }
                     }
                     if let flagError {
                         Section {
-                            Text(flagError).foregroundStyle(.red).font(.caption)
+                            Text(flagError).foregroundStyle(Color.red).font(.caption)
                         }
                     }
                     Section {

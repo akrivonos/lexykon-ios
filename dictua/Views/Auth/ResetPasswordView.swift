@@ -26,11 +26,11 @@ struct ResetPasswordView: View {
                 SecureField(String(localized: "Confirm password"), text: $password2)
             }
             if let error {
-                Text(error).font(.caption).foregroundStyle(.red)
+                Text(error).font(.caption).foregroundStyle(Color.red)
             }
             if success {
                 Text(String(localized: "Password updated. You can log in."))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color.green)
             }
             Button(String(localized: "Set password")) {
                 Task {

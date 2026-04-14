@@ -24,10 +24,10 @@ struct VerifyEmailBannerView: View {
             }
             .disabled(auth.isLoading)
             if let message {
-                Text(message).font(.caption).foregroundStyle(.green)
+                Text(message).font(.caption).foregroundStyle(Color.green)
             }
             if let error {
-                Text(error).font(.caption).foregroundStyle(.red)
+                Text(error).font(.caption).foregroundStyle(Color.red)
             }
         }
         .padding()
@@ -49,9 +49,9 @@ struct VerifyEmailFromTokenView: View {
         Form {
             if done {
                 Text(String(localized: "Email verified successfully."))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color.green)
             } else if let error {
-                Text(error).foregroundStyle(.red)
+                Text(error).foregroundStyle(Color.red)
             } else {
                 ProgressView()
                     .onAppear {

@@ -77,7 +77,7 @@ struct SettingsView: View {
                         }
                     }
                 } else if let statsLoadError {
-                    Text(statsLoadError).font(.caption).foregroundStyle(.red)
+                    Text(statsLoadError).font(.caption).foregroundStyle(Color.red)
                 } else {
                     Text(String(localized: "Loading…"))
                         .foregroundStyle(.secondary)
@@ -99,7 +99,7 @@ struct SettingsView: View {
                         }
                     } else if let err = offlineDownloadError {
                         Text(err)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(Color.red)
                             .font(.caption)
                     } else {
                         Text("Not downloaded")
@@ -136,14 +136,14 @@ struct SettingsView: View {
                         }
                     }
                     if let telegramError {
-                        Text(telegramError).font(.caption).foregroundStyle(.red)
+                        Text(telegramError).font(.caption).foregroundStyle(Color.red)
                     }
                 }
                 Section(String(localized: "Danger zone")) {
                     SecureField(String(localized: "Password"), text: $deletePassword)
                         .textContentType(.password)
                     if let deleteAccountError {
-                        Text(deleteAccountError).font(.caption).foregroundStyle(.red)
+                        Text(deleteAccountError).font(.caption).foregroundStyle(Color.red)
                     }
                     Button(String(localized: "Delete account"), role: .destructive) {
                         deleteAccountConfirm = true

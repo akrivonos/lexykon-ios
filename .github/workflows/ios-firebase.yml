@@ -37,6 +37,13 @@ jobs:
           echo -n "$P12_BASE64" | base64 --decode -o $CERT_PATH
           echo -n "$PROVISIONING_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
+          # Diagnostics (no secrets leaked — only lengths/hashes)
+          echo "P12_PASSWORD length: ${#P12_PASSWORD}"
+          echo "cert.p12 size: $(wc -c < $CERT_PATH)"
+          echo "cert.p12 sha256: $(shasum -a 256 $CERT_PATH | cut -d' ' -f1)"
+          echo "--- Test password with openssl:"
+          openssl pkcs12 -in $CERT_PATH -noout -passin env:P12_PASSWORD && echo "OPENSSL: password OK" || echo "OPENSSL: password FAILED"
+
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH

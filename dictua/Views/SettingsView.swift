@@ -16,6 +16,7 @@ struct SettingsView: View {
     @State private var deletePassword = ""
     @State private var deleteAccountConfirm = false
     @State private var deleteAccountError: String?
+    @State private var showLanguageRestartAlert = false
 
     private var offlineDictionary: OfflineDictionaryService? { appEnv.offlineDictionary }
     private var offlineDownloadURL: URL? {
@@ -223,6 +224,11 @@ struct SettingsView: View {
             await loadPublicStats()
         }
         .onChange(of: settings.interfaceLang) { _, new in
+            // Write AppleLanguages so iOS picks up the new locale for `String(localized:)`
+            // at the next app launch (SwiftUI does not hot-swap the bundle locale).
+            UserDefaults.standard.set([new], forKey: "AppleLanguages")
+            UserDefaults.standard.synchronize()
+            showLanguageRestartAlert = true
             Task { await auth.syncLocalSettingsToServer(interfaceLang: new, sourceLang: settings.sourceLang, appearance: settings.appearance) }
         }
         .onChange(of: settings.sourceLang) { _, new in
@@ -244,6 +250,11 @@ struct SettingsView: View {
             }
         } message: {
             Text(String(localized: "Your account will be scheduled for deletion. You have 30 days to recover by logging in."))
+        }
+        .alert(String(localized: "Language updated"), isPresented: $showLanguageRestartAlert) {
+            Button(String(localized: "OK"), role: .cancel) {}
+        } message: {
+            Text(String(localized: "Please close and reopen the app to apply the new interface language."))
         }
     }
 

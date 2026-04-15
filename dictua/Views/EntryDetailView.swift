@@ -217,9 +217,22 @@ struct EntryDetailView: View {
 
     private func pronounce(_ text: String) {
         let clean = text.replacingOccurrences(of: "\u{0301}", with: "")
+        guard !clean.isEmpty else { return }
+
+        // Playback category so TTS is audible even when the ringer switch is off.
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
+            try AVAudioSession.sharedInstance().setActive(true, options: [])
+        } catch {
+            // Fall through — synthesizer may still work with default session.
+        }
+
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: clean)
+        // Try to pick a uk-UA voice; fall back to any available voice if the user hasn't installed one.
         utterance.voice = AVSpeechSynthesisVoice(language: "uk-UA")
+            ?? AVSpeechSynthesisVoice.speechVoices().first(where: { $0.language.hasPrefix("uk") })
+            ?? AVSpeechSynthesisVoice(language: Locale.preferredLanguages.first ?? "en-US")
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
         synthesizer.speak(utterance)
     }

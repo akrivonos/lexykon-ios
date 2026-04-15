@@ -11,11 +11,17 @@ public actor DictAPIClient {
     private let sourceLang: () -> String
     private let logger: Logger
 
-    private let decoder: JSONDecoder = {
-        let d = JSONDecoder()
-        d.keyDecodingStrategy = .convertFromSnakeCase
-        return d
-    }()
+    // NOTE: decoder does NOT use `.convertFromSnakeCase`. That strategy conflicts
+    // with explicit CodingKeys: Swift applies the strategy to JSON keys BEFORE
+    // matching them against CodingKey raw values, so snake_case raw values like
+    // `"match_type"` never match converted JSON keys like `"matchType"`. All
+    // response models in this module use explicit CodingKeys with snake_case raw
+    // values instead.
+    //
+    // Encoder DOES use `.convertToSnakeCase` because it's safe: if a request type
+    // has no explicit CodingKeys, property names are converted camel → snake;
+    // if it has CodingKeys, the raw values are used as-is.
+    private let decoder: JSONDecoder = JSONDecoder()
 
     private let encoder: JSONEncoder = {
         let e = JSONEncoder()

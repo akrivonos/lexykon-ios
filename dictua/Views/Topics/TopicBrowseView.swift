@@ -48,6 +48,12 @@ struct TopicEntrySummary: Codable {
     let entryType: String?
     let contentTier: String?
     let definition: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, headword, pos, definition
+        case entryType = "entry_type"
+        case contentTier = "content_tier"
+    }
 }
 
 public final class TopicBrowseViewModel: ObservableObject {

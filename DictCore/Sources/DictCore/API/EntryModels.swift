@@ -7,6 +7,12 @@ public struct Headword: Codable {
     public let headword: String?
     public let headwordStressed: String?
     public let isPrimary: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case id, headword
+        case headwordStressed = "headword_stressed"
+        case isPrimary = "is_primary"
+    }
 }
 
 // MARK: - Sense Text (definition per language)
@@ -25,6 +31,11 @@ public struct SenseEquivalent: Codable {
     public let equivalent: String?
     public let matchType: String?
     public let rank: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, lang, equivalent, rank
+        case matchType = "match_type"
+    }
 }
 
 // MARK: - Illustration (example sentence)
@@ -34,6 +45,12 @@ public struct Illustration: Codable {
     public let illustrationText: String?
     public let text: String?
     public let sourceType: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, text
+        case illustrationText = "illustration_text"
+        case sourceType = "source_type"
+    }
 }
 
 // MARK: - Sense Relation
@@ -42,6 +59,12 @@ public struct SenseRelation: Codable {
     public let relationType: String?
     public let targetHeadword: String?
     public let targetEntryId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case relationType = "relation_type"
+        case targetHeadword = "target_headword"
+        case targetEntryId = "target_entry_id"
+    }
 }
 
 // MARK: - Sense
@@ -58,6 +81,14 @@ public struct Sense: Codable {
     public let senseEquivalents: [SenseEquivalent]?
     public let illustrations: [Illustration]?
     public let senseRelations: [SenseRelation]?
+
+    enum CodingKeys: String, CodingKey {
+        case id, style, usage, government, context, region, illustrations
+        case senseNumber = "sense_number"
+        case senseTexts = "sense_texts"
+        case senseEquivalents = "sense_equivalents"
+        case senseRelations = "sense_relations"
+    }
 
     /// Primary Ukrainian definition for display.
     public var definitionUk: String? {
@@ -83,6 +114,18 @@ public struct WordForm: Codable {
     public let gramMood: String?
     public let gramDegree: String?
 
+    enum CodingKeys: String, CodingKey {
+        case form
+        case gramCase = "gram_case"
+        case gramNumber = "gram_number"
+        case gramGender = "gram_gender"
+        case gramPerson = "gram_person"
+        case gramTense = "gram_tense"
+        case gramAspect = "gram_aspect"
+        case gramMood = "gram_mood"
+        case gramDegree = "gram_degree"
+    }
+
     /// Composite tag string for display, built from non-nil grammar fields.
     public var tags: String? {
         let parts = [gramCase, gramNumber, gramGender, gramPerson, gramTense, gramAspect, gramMood, gramDegree]
@@ -97,6 +140,12 @@ public struct DerivationalRelation: Codable {
     public let relationType: String?
     public let targetHeadword: String?
     public let targetEntryId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case relationType = "relation_type"
+        case targetHeadword = "target_headword"
+        case targetEntryId = "target_entry_id"
+    }
 }
 
 // MARK: - Anchor Entry
@@ -106,6 +155,11 @@ public struct AnchorEntry: Codable {
     public let entryId: String?
     public let pos: String?
     public let slug: String?
+
+    enum CodingKeys: String, CodingKey {
+        case headword, pos, slug
+        case entryId = "entry_id"
+    }
 }
 
 // MARK: - Containing Phrase
@@ -115,6 +169,12 @@ public struct ContainingPhrase: Codable {
     public let entryId: String?
     public let entryType: String?
     public let slug: String?
+
+    enum CodingKeys: String, CodingKey {
+        case headword, slug
+        case entryId = "entry_id"
+        case entryType = "entry_type"
+    }
 }
 
 // MARK: - Etymology
@@ -124,6 +184,13 @@ public struct Etymology: Codable {
     public let sourceLanguage: String?
     public let sourceWord: String?
     public let notes: String?
+
+    enum CodingKeys: String, CodingKey {
+        case notes
+        case etymologyType = "etymology_type"
+        case sourceLanguage = "source_language"
+        case sourceWord = "source_word"
+    }
 }
 
 // MARK: - Entry Detail
@@ -148,6 +215,16 @@ public struct EntryDetail: Codable {
     /// ISO8601 from API for cache invalidation.
     public let updatedAt: String?
 
+    enum CodingKeys: String, CodingKey {
+        case id, slug, pos, tier, headword, lemma, headwords, grammar, senses
+        case wordForms = "word_forms"
+        case derivationalRelations = "derivational_relations"
+        case anchorEntries = "anchor_entries"
+        case containingPhrases = "containing_phrases"
+        case entryEtymologies = "entry_etymologies"
+        case updatedAt = "updated_at"
+    }
+
     /// Primary stressed headword for display.
     public var primaryStressed: String? {
         headwords?.first(where: { $0.isPrimary == true })?.headwordStressed
@@ -165,6 +242,13 @@ public struct LemmaInfo: Codable {
     public let topicCodes: [String]?
     public let labels: [LexicalLabel]?
 
+    enum CodingKeys: String, CodingKey {
+        case lemma, pos, labels
+        case stressForms = "stress_forms"
+        case frequencyRank = "frequency_rank"
+        case topicCodes = "topic_codes"
+    }
+
     public var primaryStressed: String? {
         stressForms?.first(where: { $0.isPrimary == true })?.stressedForm
         ?? stressForms?.first?.stressedForm
@@ -181,6 +265,14 @@ public struct LexicalRelation: Codable {
     public let targetLemma: String?
     /// Also accept `targetHeadword` from newer API shape.
     public let targetHeadword: String?
+
+    enum CodingKeys: String, CodingKey {
+        case relationType = "relation_type"
+        case targetLemmaId = "target_lemma_id"
+        case targetEntryId = "target_entry_id"
+        case targetLemma = "target_lemma"
+        case targetHeadword = "target_headword"
+    }
 
     public var displayTarget: String? {
         targetHeadword ?? targetLemma

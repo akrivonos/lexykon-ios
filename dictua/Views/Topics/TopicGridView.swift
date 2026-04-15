@@ -56,6 +56,12 @@ struct TopicItem: Codable {
     let topic: String?
     let labelUk: String?
     let entryCount: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case topic
+        case labelUk = "label_uk"
+        case entryCount = "entry_count"
+    }
 }
 
 public final class TopicGridViewModel: ObservableObject {
